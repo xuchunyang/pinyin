@@ -46,7 +46,7 @@ before_script:
 script:
  - raco test -x -p pinyin
 
-after_success:
- - raco setup --check-pkg-deps --pkgs pinyin
- - raco pkg install --deps search-auto cover cover-coveralls
- - raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .
+# after_success:
+#  - raco setup --check-pkg-deps --pkgs pinyin
+#  - raco pkg install --deps search-auto cover cover-coveralls
+#  - raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .
