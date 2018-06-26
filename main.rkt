@@ -26,8 +26,39 @@
 
 ;; Code here
 
+(require racket/runtime-path            ; `define-runtime-path'
+         racket/string                  ; `string-append'
+         racket/match                   ; `match-let'
+         )
+
+(provide pinyin-hash-table pinyin)
+
+(define-runtime-path pinyin.txt "pinyin-data/pinyin.txt")
+
+(module+ test
+  (check-true (file-exists? pinyin.txt)))
+
+(define (read-data)
+  (call-with-input-file pinyin.txt
+    (lambda (in)
+      (for/hash ([m (regexp-match*
+                     ;; U+3007: líng,yuán,xīng  # 〇
+                     #rx"U\\+([0-9a-fA-F]+): +([^ ]+)"
+                     in #:match-select cdr)])
+        (match-let ([(list hanzi pinyins) m])
+          (let ([k (integer->char
+                    (string->number (string-append "#x" (bytes->string/utf-8 hanzi))))]
+                [v (string-split (bytes->string/utf-8 pinyins) ",")])
+            (values k v)))))))
+
+(define pinyin-hash-table (read-data))
+
+(define (pinyin hanzi)
+  (hash-ref pinyin-hash-table hanzi))
+
 (module+ test
   ;; Tests to be run with raco test
+  (check-equal? (pinyin #\徐) (list "xú"))
   )
 
 (module+ main
