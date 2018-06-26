@@ -33,7 +33,7 @@
 
 (provide pinyin-hash-table pinyin)
 
-(define-runtime-path pinyin.txt "pinyin-data/pinyin.txt")
+(define-runtime-path pinyin.txt "pinyin.txt")
 
 (module+ test
   (check-true (file-exists? pinyin.txt)))
