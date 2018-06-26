@@ -3,8 +3,8 @@
                     racket/base]]
 
 @title{pinyin}
-@author{xcy}
+@author{Xu Chunyang}
 
 @defmodule[pinyin]
 
-Package Description Here
+汉字转拼音
