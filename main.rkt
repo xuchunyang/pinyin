@@ -28,8 +28,7 @@
 
 (require racket/runtime-path            ; `define-runtime-path'
          racket/string                  ; `string-append'
-         racket/match                   ; `match-let'
-         )
+         racket/match)                  ; `match-let'
 
 (provide pinyin-hash-table pinyin)
 
@@ -58,9 +57,17 @@
 
 (module+ test
   ;; Tests to be run with raco test
-  (check-equal? (pinyin #\徐) (list "xú"))
-  )
+  (check-equal? (pinyin #\徐) (list "xú")))
 
+;; $ racket -l pinyin 汉字
+;; $ raco pinyin 汉字
 (module+ main
   ;; Main entry point, executed when run with the `racket` executable or DrRacket.
-  )
+  (let ([args (current-command-line-arguments)])
+    (if (not (= (vector-length args) 1))
+        (error "Usage: <pinyin> chars")
+        (for ([c (vector-ref args 0)])
+          (let ([v (hash-ref pinyin-hash-table c #f)])
+            (if v
+                (printf "~a: ~a\n" c (string-join v ", "))
+                (printf "~a: ~a\n" c c)))))))
