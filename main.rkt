@@ -28,9 +28,12 @@
 
 (require racket/runtime-path            ; `define-runtime-path'
          racket/string                  ; `string-append'
+         racket/contract
          racket/match)                  ; `match-let'
 
-(provide pinyin-hash-table pinyin)
+(provide (contract-out
+          [pinyin-hash-table hash?]
+          [pinyin (-> char? any)]))
 
 (define-runtime-path pinyin.txt "pinyin.txt")
 
