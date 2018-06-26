@@ -33,7 +33,7 @@
 
 (provide (contract-out
           [pinyin-hash-table hash?]
-          [pinyin (-> char? any)]))
+          [pinyin (-> char? (listof string?))]))
 
 (define-runtime-path pinyin.txt "pinyin.txt")
 
