@@ -22,7 +22,7 @@ env:
     # versions.
     - RACKET_VERSION=6.0
     - RACKET_VERSION=6.5
-    - RACKET_VERSION=6.11
+    - RACKET_VERSION=6.12
     - RACKET_VERSION=HEAD
 
 matrix:
