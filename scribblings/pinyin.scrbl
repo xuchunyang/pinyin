@@ -13,6 +13,8 @@
 
 一个汉字转拼音的函数库.
 
+@section{API}
+
 @defproc[(pinyin [hanzi char?]) (listof string?)]{
   返回汉字对应的拼音.
 
