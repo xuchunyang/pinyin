@@ -7,7 +7,7 @@
                     racket/base]]
 
 @title{Pinyin: Convert Hanzi to Pinyin}
-@author+email["Xu Chunyang" "mail@xuchunyang.me"]
+@author[(author+email "Xu Chunyang" "mail@xuchunyang.me")]
 
 @defmodule[pinyin]
 
