@@ -43,10 +43,10 @@
 (define (read-data)
   (call-with-input-file pinyin.txt
     (lambda (in)
-      (for/hash ([m (regexp-match*
-                     ;; U+3007: líng,yuán,xīng  # 〇
-                     #rx"U\\+([0-9a-fA-F]+): +([^ ]+)"
-                     in #:match-select cdr)])
+      (for/hasheqv ([m (regexp-match*
+                        ;; U+3007: líng,yuán,xīng  # 〇
+                        #rx"U\\+([0-9a-fA-F]+): +([^ ]+)"
+                        in #:match-select cdr)])
         (match-let ([(list hanzi pinyins) m])
           (let ([k (integer->char
                     (string->number (string-append "#x" (bytes->string/utf-8 hanzi))))]
